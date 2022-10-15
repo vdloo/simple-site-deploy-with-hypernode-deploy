@@ -30,6 +30,11 @@ And then to deploy production run:
 docker run --rm -it --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy deploy production -vvv
 ```
 
+And to deploy an 'ephemeral' / throwaway testing environment:
+```
+$ docker run --rm -it --env HYPERNODE_API_TOKEN=yoursecretapitoken --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy deploy testing -vvv
+```
+
 # Notes
 
 If you're testing this and you're getting:
@@ -60,3 +65,12 @@ If you're testing this and you're getting:
 ```
 
 You can log in to the Hypernode and `rm /data/web/apps/yourhypernodeappname.hypernode.io/.dep/deploy.lock` to unlock the deploy.
+
+For the API token see `/etc/hypernode/hypernode_api_token` on the Hypernode. Make sure to enable `enable plan changes via the CLI` on the `Change plan` page in the Hypernode Control Panel first. If you don't do that you'll see this message:
+
+```
+In HypernodeClient.php line 46:
+
+  [Hypernode\Api\Exception\HypernodeApiClientException (403)]
+  {"detail":"Due to the financial nature of the command, please enable api token usage on the control panel. This can be done by owner and admin roles in the Control Panel under the Change Plan menu."}
+```
