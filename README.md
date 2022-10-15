@@ -20,7 +20,12 @@ First you need to perform the build step.
 $ docker run --rm -it --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy build -vvv
 ```
 
-Then you can perform the actual deploy by running the deploy step:
+Then you can perform the actual deploy staging by running the deploy step:
+```
+docker run --rm -it --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy deploy staging -vvv
+```
+
+And then to deploy production run:
 ```
 docker run --rm -it --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy deploy production -vvv
 ```
