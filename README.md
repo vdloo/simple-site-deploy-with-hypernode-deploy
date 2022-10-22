@@ -30,9 +30,15 @@ And then to deploy production run:
 docker run --rm -it --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy deploy production -vvv
 ```
 
-And to deploy an 'ephemeral' / throwaway testing environment:
+And to deploy an 'brancher' / throwaway testing environment:
 ```
 $ docker run --rm -it --env HYPERNODE_API_TOKEN=yoursecretapitoken --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy deploy testing -vvv
+```
+
+And to deploy to a hypernode-docker local development environment:
+```
+# Read the comment in deployer.php before you attempt to do this
+docker run --rm -it --env SSH_PRIVATE_KEY="$(cat ~/.ssh/yourdeploykey | base64)" -v ${PWD}:/build quay.io/hypernode/deploy:latest hypernode-deploy deploy docker -vvv
 ```
 
 # Notes
